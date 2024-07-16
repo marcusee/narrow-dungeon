@@ -188,7 +188,30 @@ offset_bottom = 216.0
 
 [node name="SKILL_1" type="Button" parent="UIController"]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 239.0
+offset_top = 121.0
+offset_right = 247.0
+offset_bottom = 129.0
+
+[node name="SKILL_2" type="Button" parent="UIController"]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 121.0
+offset_right = 260.0
+offset_bottom = 129.0
+
+[node name="SKILL_3" type="Button" parent="UIController"]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 121.0
+offset_right = 288.0
+offset_bottom = 129.0
+
+[node name="SKILL_4" type="Button" parent="UIController"]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 121.0
+offset_right = 273.0
+offset_bottom = 129.0
 
 [connection signal="input_event" from="Dungeon/PlayerParty/Tank" to="Dungeon/PlayerParty/Tank" method="_on_input_event"]
