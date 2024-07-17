@@ -1,9 +1,6 @@
-extends Node2D
+extends Control
 
-
-@onready var player_party = $PlayerParty
-@onready var enemies = $Enemies
-
+signal play_skill(skill)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -12,17 +9,14 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-	
 
-func _setup_actors():
+
+func handleSkill():
 	
 	pass
-	
-func set_up_enemies():
-	pass
 
-
-
-func _on_ui_controller_play_skill(skill):
-	print(skill.skillName)
+func _on_skill_1_button_up():
+	play_skill.emit({
+		"skillName": "Stun"	
+	})
 	pass # Replace with function body.
