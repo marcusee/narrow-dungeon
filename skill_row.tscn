@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dw6d68cmwbdv7"]
+
+[node name="SkillRow" type="HBoxContainer"]
+
+[node name="SKILL" type="Button" parent="."]
+layout_mode = 2

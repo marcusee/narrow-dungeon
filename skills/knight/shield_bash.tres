@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ShieldBash" load_steps=3 format=3 uid="uid://blps2qs4dfq0s"]
+
+[ext_resource type="Texture2D" uid="uid://dfekdyri4t14d" path="res://skills/knight/shield_bash.png" id="1_pm58h"]
+[ext_resource type="Script" path="res://skills/knight/shield_bash.gd" id="1_xis1n"]
+
+[resource]
+script = ExtResource("1_xis1n")
+icon = ExtResource("1_pm58h")
+description = "Bash enemy infront to stun for 1 second"
+skill_name = "Shield Bash"

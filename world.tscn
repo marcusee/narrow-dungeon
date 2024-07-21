@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://diu0fkj535mul"]
+[gd_scene load_steps=14 format=3 uid="uid://diu0fkj535mul"]
 
 [ext_resource type="Texture2D" uid="uid://by8gm2x6pel8y" path="res://tileset/tilemap_packed.png" id="1_i5nas"]
 [ext_resource type="Script" path="res://WorldTileMap.gd" id="2_imuq6"]
 [ext_resource type="Texture2D" uid="uid://grdwa8mek1lu" path="res://assets/knight/knight.png" id="3_4a0rc"]
 [ext_resource type="Script" path="res://Dungeon.gd" id="3_bji8q"]
-[ext_resource type="Script" path="res://Tank.gd" id="3_o6kam"]
-[ext_resource type="Script" path="res://Knight.gd" id="4_lw2ks"]
-[ext_resource type="Script" path="res://Enemies.gd" id="6_rw5i8"]
-[ext_resource type="Script" path="res://UIController.gd" id="8_erp2l"]
+[ext_resource type="Script" path="res://HeroSlot.gd" id="3_o6kam"]
+[ext_resource type="Script" path="res://Hero.gd" id="5_fo6df"]
+[ext_resource type="Script" path="res://SkillBook.gd" id="7_cmwnb"]
+[ext_resource type="Resource" uid="uid://bprsiipmwkuun" path="res://skills/knight/block.tres" id="8_84dgh"]
+[ext_resource type="Script" path="res://SkillManager.gd" id="8_erp2l"]
+[ext_resource type="Resource" uid="uid://blps2qs4dfq0s" path="res://skills/knight/shield_bash.tres" id="9_ckfg8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4w6qn"]
 texture = ExtResource("1_i5nas")
@@ -163,59 +165,70 @@ zoom = Vector2(3, 3)
 [node name="Dungeon" type="Node2D" parent="."]
 script = ExtResource("3_bji8q")
 
-[node name="PlayerParty" type="Node2D" parent="Dungeon"]
+[node name="HeroManager" type="Node2D" parent="Dungeon"]
 position = Vector2(190, 110)
 
-[node name="Tank" type="Area2D" parent="Dungeon/PlayerParty"]
+[node name="Tank" type="Area2D" parent="Dungeon/HeroManager"]
 script = ExtResource("3_o6kam")
 
-[node name="Knight" type="Node2D" parent="Dungeon/PlayerParty/Tank"]
-script = ExtResource("4_lw2ks")
+[node name="Hero" type="Node2D" parent="Dungeon/HeroManager/Tank"]
+script = ExtResource("5_fo6df")
+skills = Array[Resource("res://skills/hero_skill.gd")]([null, null, null])
 
-[node name="Sprite2D" type="Sprite2D" parent="Dungeon/PlayerParty/Tank/Knight"]
+[node name="Sprite2D" type="Sprite2D" parent="Dungeon/HeroManager/Tank/Hero"]
 texture = ExtResource("3_4a0rc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/PlayerParty/Tank"]
+[node name="SkillBook" type="Node2D" parent="Dungeon/HeroManager/Tank/Hero"]
+script = ExtResource("7_cmwnb")
+skillList = Array[Resource("res://skills/hero_skill.gd")]([ExtResource("8_84dgh"), ExtResource("9_ckfg8")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/HeroManager/Tank"]
 shape = SubResource("RectangleShape2D_w8cl4")
 
-[node name="Enemies" type="Node2D" parent="Dungeon"]
-script = ExtResource("6_rw5i8")
+[node name="MobManager" type="Node2D" parent="Dungeon"]
 
-[node name="UIController" type="Control" parent="Dungeon"]
+[node name="SkillManager" type="Control" parent="Dungeon"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 384.0
+offset_left = 256.0
+offset_top = 99.0
+offset_right = 297.0
 offset_bottom = 216.0
 script = ExtResource("8_erp2l")
 
-[node name="SKILL_1" type="Button" parent="Dungeon/UIController"]
+[node name="SkillPanel" type="VBoxContainer" parent="Dungeon/SkillManager"]
 layout_mode = 0
-offset_left = 239.0
-offset_top = 121.0
-offset_right = 247.0
-offset_bottom = 129.0
+offset_right = 38.0
+offset_bottom = 44.0
 
-[node name="SKILL_2" type="Button" parent="Dungeon/UIController"]
-layout_mode = 0
-offset_left = 252.0
-offset_top = 121.0
-offset_right = 260.0
-offset_bottom = 129.0
+[node name="SkillRow1" type="HBoxContainer" parent="Dungeon/SkillManager/SkillPanel"]
+layout_mode = 2
 
-[node name="SKILL_3" type="Button" parent="Dungeon/UIController"]
-layout_mode = 0
-offset_left = 280.0
-offset_top = 121.0
-offset_right = 288.0
-offset_bottom = 129.0
+[node name="SKILL" type="Button" parent="Dungeon/SkillManager/SkillPanel/SkillRow1"]
+layout_mode = 2
 
-[node name="SKILL_4" type="Button" parent="Dungeon/UIController"]
-layout_mode = 0
-offset_left = 265.0
-offset_top = 121.0
-offset_right = 273.0
-offset_bottom = 129.0
+[node name="SkillRow2" type="HBoxContainer" parent="Dungeon/SkillManager/SkillPanel"]
+layout_mode = 2
 
-[connection signal="input_event" from="Dungeon/PlayerParty/Tank" to="Dungeon/PlayerParty/Tank" method="_on_input_event"]
-[connection signal="play_skill" from="Dungeon/UIController" to="Dungeon" method="_on_ui_controller_play_skill"]
-[connection signal="button_up" from="Dungeon/UIController/SKILL_1" to="Dungeon/UIController" method="_on_skill_1_button_up"]
+[node name="SKILL" type="Button" parent="Dungeon/SkillManager/SkillPanel/SkillRow2"]
+layout_mode = 2
+
+[node name="SkillRow3" type="HBoxContainer" parent="Dungeon/SkillManager/SkillPanel"]
+layout_mode = 2
+
+[node name="SKILL" type="Button" parent="Dungeon/SkillManager/SkillPanel/SkillRow3"]
+layout_mode = 2
+
+[node name="SkillRow4" type="HBoxContainer" parent="Dungeon/SkillManager/SkillPanel"]
+layout_mode = 2
+
+[node name="SKILL" type="Button" parent="Dungeon/SkillManager/SkillPanel/SkillRow4"]
+layout_mode = 2
+
+[connection signal="hero_selected" from="Dungeon/HeroManager/Tank" to="Dungeon" method="_on_hero_selected"]
+[connection signal="input_event" from="Dungeon/HeroManager/Tank" to="Dungeon/HeroManager/Tank" method="_on_input_event"]
+[connection signal="play_skill" from="Dungeon/SkillManager" to="Dungeon" method="_on_ui_controller_play_skill"]
+[connection signal="button_up" from="Dungeon/SkillManager/SkillPanel/SkillRow1/SKILL" to="Dungeon/SkillManager" method="_on_skill_button_up"]
+[connection signal="button_up" from="Dungeon/SkillManager/SkillPanel/SkillRow2/SKILL" to="Dungeon/SkillManager" method="_on_skill_button_up"]
+[connection signal="button_up" from="Dungeon/SkillManager/SkillPanel/SkillRow3/SKILL" to="Dungeon/SkillManager" method="_on_skill_button_up"]
+[connection signal="button_up" from="Dungeon/SkillManager/SkillPanel/SkillRow4/SKILL" to="Dungeon/SkillManager" method="_on_skill_button_up"]

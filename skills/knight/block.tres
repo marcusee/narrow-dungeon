@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Block" load_steps=3 format=3 uid="uid://bprsiipmwkuun"]
+
+[ext_resource type="Script" path="res://skills/knight/block.gd" id="1_2vhni"]
+[ext_resource type="Texture2D" uid="uid://dpg4ldl834fyl" path="res://skills/knight/block.png" id="1_i0ba0"]
+
+[resource]
+script = ExtResource("1_2vhni")
+icon = ExtResource("1_i0ba0")
+description = "Incoming Damange is blocked for 3 seconds"
+skill_name = "Block"
