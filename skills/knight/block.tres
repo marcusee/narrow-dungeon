@@ -6,5 +6,6 @@
 [resource]
 script = ExtResource("1_2vhni")
 icon = ExtResource("1_i0ba0")
+skill_type = 0
 description = "Incoming Damange is blocked for 3 seconds"
 skill_name = "Block"

@@ -1,6 +1,6 @@
 extends Control
 
-signal play_skill(skill)
+signal play_skill(caster, skill)
 var selected_hero : Node2D = null
 
 # Called when the node enters the scene tree for the first time.
@@ -14,7 +14,6 @@ func _process(delta):
 
 
 func handleSkill():
-	
 	pass
 	
 func set_selected_hero(hero: Node2D):
@@ -28,8 +27,9 @@ func set_selected_hero(hero: Node2D):
 		skill_button.text = skill.skill_name
 		#skill_button.font_size = 5
 		#skill_button.set_size(Vector2(4, 4))
+		skill_button.button_up.connect(_on_skill_pressed.bind(skill))
 
-
+		#skill_button.pressed.
 		i = i + 1
 		
 	
@@ -37,9 +37,6 @@ func set_selected_hero(hero: Node2D):
 		#var skill_button = row.get_node('./SKILL')
 		#print(skill_button.name)
 
-
-func _on_skill_button_up():
-	play_skill.emit({
-		"skillName": "Stun"	
-	})
-	pass # Replace with function body.
+func _on_skill_pressed(skill):
+	play_skill.emit(selected_hero, skill)
+	pass

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://grdwa8mek1lu"
-path="res://.godot/imported/knight.png-4989637c82232941851df7e495b35c3b.ctex"
+uid="uid://geady18q4ax"
+path="res://.godot/imported/ranger.png-895551f5bb7675f549152f9623f1273b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/knight/knight.png"
-dest_files=["res://.godot/imported/knight.png-4989637c82232941851df7e495b35c3b.ctex"]
+source_file="res://assets/heroes/ranger/ranger.png"
+dest_files=["res://.godot/imported/ranger.png-895551f5bb7675f549152f9623f1273b.ctex"]
 
 [params]
 
