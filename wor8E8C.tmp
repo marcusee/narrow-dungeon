@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://diu0fkj535mul"]
+[gd_scene load_steps=25 format=3 uid="uid://diu0fkj535mul"]
 
 [ext_resource type="Texture2D" uid="uid://by8gm2x6pel8y" path="res://tileset/tilemap_packed.png" id="1_i5nas"]
 [ext_resource type="Script" path="res://scripts/directors/WorldTileMap.gd" id="2_imuq6"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" path="res://scripts/executive/AutoAttack.gd" id="11_ga7h5"]
 [ext_resource type="Resource" uid="uid://bop00of38f17v" path="res://skills/ranger/pwoer_shot.tres" id="11_qyuoj"]
 [ext_resource type="Script" path="res://scripts/executive/DeathFade.gd" id="12_72ma0"]
-[ext_resource type="Script" path="res://scripts/executive/MeleeAnimation.gd" id="12_g8pro"]
 [ext_resource type="Script" path="res://scripts/managers/MobManager.gd" id="12_pj0as"]
 [ext_resource type="Texture2D" uid="uid://dlmwrayvjphux" path="res://assets/mobs/crab.png" id="13_5lp2i"]
 [ext_resource type="Script" path="res://scripts/executive/MobArea.gd" id="14_ig4a3"]
@@ -211,9 +210,6 @@ shape = SubResource("RectangleShape2D_im4sf")
 debug_color = Color(0.806501, 0.0599364, 0.392231, 0.42)
 
 [node name="Timer" type="Timer" parent="Dungeon/HeroManager/Hero/AutoAttack"]
-
-[node name="MeleeAnimation" type="Node2D" parent="Dungeon/HeroManager/Hero/AutoAttack"]
-script = ExtResource("12_g8pro")
 
 [node name="DeathFade" type="Node2D" parent="Dungeon/HeroManager/Hero"]
 script = ExtResource("12_72ma0")

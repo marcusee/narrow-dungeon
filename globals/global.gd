@@ -5,3 +5,8 @@ enum SkillType {
 	TARGET,
 	HELPER
 }
+
+enum TEAM {
+	Heroes,
+	Mob,
+}

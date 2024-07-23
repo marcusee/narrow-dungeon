@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://e1i0o3d641uk"]
 
-[ext_resource type="Script" path="res://Hero.gd" id="1_8v55g"]
+[ext_resource type="Script" path="res://scripts/executive/Piece.gd" id="1_8v55g"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aib1x"]
 load_path = "res://.godot/imported/knight.png-e3348a7cebc09264fbd141e55db8f2a4.ctex"

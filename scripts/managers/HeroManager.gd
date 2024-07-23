@@ -6,6 +6,8 @@ func _ready():
 	for hero in get_children():
 		var shape = hero.get_node('./Shape')
 		shape.input_event.connect(_on_input_event.bind(hero))
+		
+		hero.team = Global.TEAM.Heroes
 	pass # Replace with function body.
 
 
