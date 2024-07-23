@@ -17,10 +17,6 @@ func _ready():
 func _process(delta):
 	pass
 
-
-func handleSkill():
-	pass
-	
 func set_selected_hero(hero: Node2D):
 	selected_hero = hero
 	var skill_book = hero.skill_book

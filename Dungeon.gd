@@ -1,11 +1,11 @@
 extends Node2D
 
-
 @onready var player_party = $PlayerParty
 @onready var enemies = $Enemies
 @onready var skill_manager = $SkillManager
 @onready var mob_manager = $MobManager
-@onready var selected_hero : Node2D = $HeroManager/Tank/Hero
+@onready var hero_manager = $HeroManager
+@onready var selected_hero : Node2D = $HeroManager/Hero
 
 enum DungeonState {
 	NORMAL,
@@ -18,10 +18,10 @@ var _state : DungeonState = DungeonState.NORMAL
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	skill_manager.set_selected_hero(selected_hero)
+	skill_manager.play_skill.connect(play_skill)
 	skill_manager.set_targeting.connect(set_targetting)
 	mob_manager.enemy_clicked.connect(enemy_clicked)
-	
-	pass # Replace with function body.
+	hero_manager.piece_clicked.connect(hero_clicked)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,18 +42,22 @@ func enemy_clicked(mob):
 		skill_manager.release_active_skill()
 		_state = DungeonState.NORMAL
 
-func _on_ui_controller_play_skill(caster, skill):
+#func _on_ui_controller_play_skill(caster, skill):
+	#print(skill.skill_name)
+	#if skill.skill_type == Global.SkillType.ACTIVE:
+		#skill.invoke_skill(caster, self, null)
+
+func play_skill(caster, skill):
 	print(skill.skill_name)
 	if skill.skill_type == Global.SkillType.ACTIVE:
 		skill.invoke_skill(caster, self, null)
-
-
-func _on_hero_selected(hero):
+		
+func set_targetting():
+	_state = DungeonState.TARGETING
+	
+func hero_clicked(hero):
 	if _state == DungeonState.NORMAL:
 		selected_hero = hero
 		skill_manager.set_selected_hero(selected_hero)
-	#elif _state == DungeonState.TARGETING:
 	
-func set_targetting():
-	_state = DungeonState.TARGETING
 	
