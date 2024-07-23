@@ -14,6 +14,7 @@ func _process(delta):
 
 func take_damage(damage):
 	hp -= damage
+	_update_hp_ui()
 
 func _update_hp_ui():
 	var label = $Hpcontrol/Label

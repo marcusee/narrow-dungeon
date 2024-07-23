@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_yl7jr")
-damage = 100
+damage = 25
 skill_type = 1
 description = "Shoot a high damage shot"
 skill_name = "Power Shot"

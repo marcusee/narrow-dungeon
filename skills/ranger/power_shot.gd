@@ -1,11 +1,14 @@
 class_name PowerShot
 extends HeroSkill
 
-@export var damage := 50
+@export var damage := 25
 
 func _init():
 	skill_type = Global.SkillType.TARGET
 
 func invoke_skill(caster, dungeon_director, target):
-	print("FIRE")
+	var _damagable = target.get_node('Damagable')
+	if _damagable != null:
+		print("yeap")
+		_damagable.take_damage(damage)
 	pass
