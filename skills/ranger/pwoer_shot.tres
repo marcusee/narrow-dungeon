@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PowerShot" load_steps=2 format=3 uid="uid://bop00of38f17v"]
+
+[ext_resource type="Script" path="res://skills/ranger/power_shot.gd" id="1_yl7jr"]
+
+[resource]
+script = ExtResource("1_yl7jr")
+damage = 100
+skill_type = 1
+description = "Shoot a high damage shot"
+skill_name = "Power Shot"

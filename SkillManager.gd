@@ -1,7 +1,12 @@
 extends Control
 
 signal play_skill(caster, skill)
+signal set_targeting()
+
 var selected_hero : Node2D = null
+
+# when targeting we use this skill
+var active_skill : Skill = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +26,13 @@ func set_selected_hero(hero: Node2D):
 	var skill_book = hero.skill_book
 	var panel = $SkillPanel
 	
+	# Clear current skill
+	for row in get_node('SkillPanel').get_children():
+		var button = row.get_node('./SKILL')
+		button.text = ""
+		if button.button_up.is_connected(_on_skill_pressed):
+			button.button_up.disconnect(_on_skill_pressed)
+	
 	var i = 0
 	for skill in skill_book.skillList:
 		var skill_button = panel.get_children()[i].get_node('./SKILL')
@@ -38,5 +50,13 @@ func set_selected_hero(hero: Node2D):
 		#print(skill_button.name)
 
 func _on_skill_pressed(skill):
-	play_skill.emit(selected_hero, skill)
+	if skill.skill_type == Global.SkillType.TARGET:
+		active_skill = skill
+		set_targeting.emit()
+	else:
+		play_skill.emit(selected_hero, skill)
+	pass
+	
+func release_active_skill():
+	active_skill = null
 	pass

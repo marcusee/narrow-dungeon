@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://diu0fkj535mul"]
+[gd_scene load_steps=22 format=3 uid="uid://diu0fkj535mul"]
 
 [ext_resource type="Texture2D" uid="uid://by8gm2x6pel8y" path="res://tileset/tilemap_packed.png" id="1_i5nas"]
 [ext_resource type="Script" path="res://WorldTileMap.gd" id="2_imuq6"]
@@ -10,8 +10,10 @@
 [ext_resource type="Resource" uid="uid://bprsiipmwkuun" path="res://skills/knight/block.tres" id="8_84dgh"]
 [ext_resource type="Script" path="res://SkillManager.gd" id="8_erp2l"]
 [ext_resource type="Resource" uid="uid://blps2qs4dfq0s" path="res://skills/knight/shield_bash.tres" id="9_ckfg8"]
+[ext_resource type="Script" path="res://Damagable.gd" id="10_1co8w"]
 [ext_resource type="Texture2D" uid="uid://geady18q4ax" path="res://assets/heroes/ranger/ranger.png" id="10_80dsa"]
 [ext_resource type="Texture2D" uid="uid://bnb876corp5nv" path="res://assets/heroes/priest/priest.png" id="10_v0bnc"]
+[ext_resource type="Resource" uid="uid://bop00of38f17v" path="res://skills/ranger/pwoer_shot.tres" id="11_qyuoj"]
 [ext_resource type="Script" path="res://MobManager.gd" id="12_pj0as"]
 [ext_resource type="Texture2D" uid="uid://dlmwrayvjphux" path="res://assets/mobs/crab.png" id="13_5lp2i"]
 [ext_resource type="Script" path="res://MobArea.gd" id="14_ig4a3"]
@@ -189,6 +191,28 @@ texture = ExtResource("3_4a0rc")
 script = ExtResource("7_cmwnb")
 skillList = Array[Resource("res://skills/hero_skill.gd")]([ExtResource("8_84dgh"), ExtResource("9_ckfg8")])
 
+[node name="Damagable" type="Node2D" parent="Dungeon/HeroManager/Tank/Hero"]
+script = ExtResource("10_1co8w")
+
+[node name="Hpcontrol" type="Control" parent="Dungeon/HeroManager/Tank/Hero/Damagable"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -42.0
+offset_top = -9.0
+offset_right = -10.0
+offset_bottom = 10.0
+
+[node name="Label" type="Label" parent="Dungeon/HeroManager/Tank/Hero/Damagable/Hpcontrol"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -9.5
+offset_bottom = 13.5
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/HeroManager/Tank"]
 shape = SubResource("RectangleShape2D_w8cl4")
 
@@ -205,7 +229,7 @@ texture = ExtResource("10_80dsa")
 
 [node name="SkillBook" type="Node2D" parent="Dungeon/HeroManager/DPS/Hero"]
 script = ExtResource("7_cmwnb")
-skillList = Array[Resource("res://skills/hero_skill.gd")]([ExtResource("8_84dgh"), ExtResource("9_ckfg8")])
+skillList = Array[Resource("res://skills/hero_skill.gd")]([ExtResource("11_qyuoj")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/HeroManager/DPS"]
 shape = SubResource("RectangleShape2D_w8cl4")
