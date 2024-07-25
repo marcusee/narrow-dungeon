@@ -20,10 +20,18 @@ func _ready():
 	skill_manager.set_selected_hero(selected_hero)
 	skill_manager.play_skill.connect(play_skill)
 	skill_manager.set_targeting.connect(set_targetting)
+	skill_manager.set_helping.connect(set_helping)
 	mob_manager.enemy_clicked.connect(enemy_clicked)
 	hero_manager.piece_clicked.connect(hero_clicked)
 
-
+func _input(event):
+	# Check if the event is a mouse button event
+	if event is InputEventMouseButton:
+		# Reset state
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			if _state == DungeonState.TARGETING or _state == DungeonState.HELPING:
+				_state = DungeonState.NORMAL
+			
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
@@ -55,9 +63,15 @@ func play_skill(caster, skill):
 func set_targetting():
 	_state = DungeonState.TARGETING
 	
+func set_helping():
+	_state = DungeonState.HELPING
+	
 func hero_clicked(hero):
 	if _state == DungeonState.NORMAL:
 		selected_hero = hero
 		skill_manager.set_selected_hero(selected_hero)
-	
+	if _state == DungeonState.HELPING:
+		skill_manager.active_skill.invoke_skill(selected_hero, self, hero)
+		skill_manager.release_active_skill()
+		_state = DungeonState.NORMAL
 	

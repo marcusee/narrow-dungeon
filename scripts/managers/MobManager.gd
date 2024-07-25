@@ -3,7 +3,7 @@ signal enemy_clicked(mob)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for mob in get_children():
-		var mob_area = mob.get_node('./MobArea')
+		var mob_area = mob.get_node('./Shape')
 		mob_area.input_event.connect(_on_input_event.bind(mob))
 		#mob_area.pressed.connect(on_mob_click())
 	pass # Replace with function body.

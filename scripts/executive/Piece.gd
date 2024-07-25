@@ -5,7 +5,7 @@ extends Node2D
 @export var skill_cooldown = [5,5,5]
 @onready var skill_book : Node2D = $SkillBook
 
-var team = Global.TEAM.Mob
+@export var team :Global.TEAM = Global.TEAM.Mob
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var deathFade = $DeathFade
@@ -22,6 +22,11 @@ func take_damage(damage):
 	var _damagable = $Damagable
 	if _damagable != null:
 		_damagable.take_damage(damage)
+
+func heal(value):
+	var _damagable = $Damagable
+	if _damagable:
+		_damagable.heal(value)
 		
 func die():
 	if $DeathFade:

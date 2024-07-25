@@ -2,9 +2,10 @@ extends Area2D
 
 var _piece_in_range = null
 @export var damage := 5
+@onready var team = get_parent().team
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var team = get_parent().team
 	if team == Global.TEAM.Mob:
 		position.y = position.y * -1
 	self.area_entered.connect(self._on_body_entered)

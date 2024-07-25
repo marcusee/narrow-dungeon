@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://unb3xjlnuwom"]
+
+[ext_resource type="Script" path="res://scripts/executive/AutoAttack.gd" id="1_vamf5"]
+[ext_resource type="Script" path="res://scripts/executive/MeleeAnimation.gd" id="2_7734q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_im4sf"]
+
+[node name="AutoAttack" type="Area2D"]
+script = ExtResource("1_vamf5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+scale = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_im4sf")
+debug_color = Color(0.806501, 0.0599364, 0.392231, 0.42)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="MeleeAnimation" type="Node2D" parent="."]
+script = ExtResource("2_7734q")

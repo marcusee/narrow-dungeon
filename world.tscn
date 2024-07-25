@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://diu0fkj535mul"]
+[gd_scene load_steps=27 format=3 uid="uid://diu0fkj535mul"]
 
 [ext_resource type="Texture2D" uid="uid://by8gm2x6pel8y" path="res://tileset/tilemap_packed.png" id="1_i5nas"]
 [ext_resource type="Script" path="res://scripts/directors/WorldTileMap.gd" id="2_imuq6"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://scripts/managers/MobManager.gd" id="12_pj0as"]
 [ext_resource type="Texture2D" uid="uid://dlmwrayvjphux" path="res://assets/mobs/crab.png" id="13_5lp2i"]
 [ext_resource type="Script" path="res://scripts/executive/MobArea.gd" id="14_ig4a3"]
+[ext_resource type="Resource" uid="uid://cqgfs7ypt4v8j" path="res://skills/priest/heal.tres" id="17_4bwym"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4w6qn"]
 texture = ExtResource("1_i5nas")
@@ -186,6 +187,7 @@ script = ExtResource("4_7cook")
 [node name="Hero" type="Node2D" parent="Dungeon/HeroManager"]
 script = ExtResource("5_fo6df")
 skills = Array[Resource("res://skills/hero_skill.gd")]([null, null, null])
+team = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="Dungeon/HeroManager/Hero"]
 texture = ExtResource("3_4a0rc")
@@ -250,7 +252,7 @@ texture = ExtResource("10_v0bnc")
 
 [node name="SkillBook" type="Node2D" parent="Dungeon/HeroManager/Hero3"]
 script = ExtResource("7_cmwnb")
-skillList = Array[Resource("res://skills/hero_skill.gd")]([ExtResource("8_84dgh"), ExtResource("9_ckfg8")])
+skillList = Array[Resource("res://skills/hero_skill.gd")]([ExtResource("8_84dgh"), ExtResource("17_4bwym")])
 
 [node name="MobManager" type="Node2D" parent="Dungeon"]
 position = Vector2(190, 16)
@@ -262,10 +264,10 @@ script = ExtResource("5_fo6df")
 [node name="Sprite2D" type="Sprite2D" parent="Dungeon/MobManager/Mob"]
 texture = ExtResource("13_5lp2i")
 
-[node name="MobArea" type="Area2D" parent="Dungeon/MobManager/Mob"]
+[node name="Shape" type="Area2D" parent="Dungeon/MobManager/Mob"]
 script = ExtResource("14_ig4a3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/MobManager/Mob/MobArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/MobManager/Mob/Shape"]
 shape = SubResource("RectangleShape2D_44wmu")
 
 [node name="Damagable" parent="Dungeon/MobManager/Mob" instance=ExtResource("10_8hd32")]
@@ -277,16 +279,30 @@ script = ExtResource("5_fo6df")
 [node name="Sprite2D" type="Sprite2D" parent="Dungeon/MobManager/Mob2"]
 texture = ExtResource("13_5lp2i")
 
-[node name="MobArea" type="Area2D" parent="Dungeon/MobManager/Mob2"]
+[node name="Shape" type="Area2D" parent="Dungeon/MobManager/Mob2"]
 script = ExtResource("14_ig4a3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/MobManager/Mob2/MobArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/MobManager/Mob2/Shape"]
 shape = SubResource("RectangleShape2D_44wmu")
 
 [node name="Damagable" parent="Dungeon/MobManager/Mob2" instance=ExtResource("10_8hd32")]
 
 [node name="DeathFade" type="Node2D" parent="Dungeon/MobManager/Mob2"]
 script = ExtResource("12_72ma0")
+
+[node name="AutoAttack" type="Area2D" parent="Dungeon/MobManager/Mob2"]
+script = ExtResource("11_ga7h5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/MobManager/Mob2/AutoAttack"]
+position = Vector2(0, -10)
+scale = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_im4sf")
+debug_color = Color(0.806501, 0.0599364, 0.392231, 0.42)
+
+[node name="Timer" type="Timer" parent="Dungeon/MobManager/Mob2/AutoAttack"]
+
+[node name="MeleeAnimation" type="Node2D" parent="Dungeon/MobManager/Mob2/AutoAttack"]
+script = ExtResource("12_g8pro")
 
 [node name="SkillManager" type="Control" parent="Dungeon"]
 layout_mode = 3

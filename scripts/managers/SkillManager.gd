@@ -2,6 +2,8 @@ extends Control
 
 signal play_skill(caster, skill)
 signal set_targeting()
+signal set_helping()
+
 
 var selected_hero : Node2D = null
 
@@ -49,6 +51,9 @@ func _on_skill_pressed(skill):
 	if skill.skill_type == Global.SkillType.TARGET:
 		active_skill = skill
 		set_targeting.emit()
+	elif skill.skill_type == Global.SkillType.HELPER:
+		active_skill = skill
+		set_helping.emit()
 	else:
 		play_skill.emit(selected_hero, skill)
 	pass
