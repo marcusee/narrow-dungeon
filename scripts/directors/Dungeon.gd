@@ -29,6 +29,12 @@ func _ready():
 	hero_manager.piece_clicked.connect(hero_clicked)
 	
 	piece_resource.hire_mob("Crab")
+	piece_resource.hire_mob("Crab")
+	piece_resource.hire_mob("Crab")
+	piece_resource.hire_mob("Crab")
+	piece_resource.hire_mob("Crab")
+	
+	
 	postiion_manager.update_positions()
 	
 
@@ -53,7 +59,7 @@ func set_up_enemies():
 	pass
 	
 func enemy_clicked(mob):
-	if _state == Global.SkillType.TARGET:
+	if _state == DungeonState.TARGETING:
 		skill_manager.active_skill.invoke_skill(selected_hero, self, mob)
 		skill_manager.release_active_skill()
 		_state = DungeonState.NORMAL

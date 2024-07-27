@@ -197,7 +197,8 @@ script = ExtResource("5_fo6df")
 texture = ExtResource("13_5lp2i")
 
 [node name="Shape" type="Area2D" parent="Dungeon/PieceResource/PieceCandidate/Crab"]
-collision_mask = 2
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("14_ig4a3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/PieceResource/PieceCandidate/Crab/Shape"]
@@ -209,11 +210,12 @@ shape = SubResource("RectangleShape2D_44wmu")
 script = ExtResource("12_72ma0")
 
 [node name="AutoAttack" type="Area2D" parent="Dungeon/PieceResource/PieceCandidate/Crab"]
-collision_mask = 2
+collision_layer = 0
+collision_mask = 5
 script = ExtResource("11_ga7h5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/PieceResource/PieceCandidate/Crab/AutoAttack"]
-position = Vector2(0, -10)
+position = Vector2(0, 10)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_im4sf")
 debug_color = Color(0.806501, 0.0599364, 0.392231, 0.42)
@@ -269,6 +271,8 @@ script = ExtResource("7_cmwnb")
 skillList = Array[Resource("res://skills/hero_skill.gd")]([ExtResource("8_84dgh"), ExtResource("9_ckfg8")])
 
 [node name="Shape" type="Area2D" parent="Dungeon/HeroManager/Hero"]
+collision_layer = 5
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/HeroManager/Hero/Shape"]
 shape = SubResource("RectangleShape2D_w8cl4")
@@ -276,6 +280,8 @@ shape = SubResource("RectangleShape2D_w8cl4")
 [node name="Damagable" parent="Dungeon/HeroManager/Hero" instance=ExtResource("10_8hd32")]
 
 [node name="AutoAttack" type="Area2D" parent="Dungeon/HeroManager/Hero"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("11_ga7h5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/HeroManager/Hero/AutoAttack"]
@@ -309,6 +315,22 @@ shape = SubResource("RectangleShape2D_w8cl4")
 script = ExtResource("7_cmwnb")
 skillList = Array[Resource("res://skills/hero_skill.gd")]([ExtResource("11_qyuoj")])
 
+[node name="AutoAttack" type="Area2D" parent="Dungeon/HeroManager/Hero2"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("11_ga7h5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/HeroManager/Hero2/AutoAttack"]
+position = Vector2(0, -10)
+scale = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_im4sf")
+debug_color = Color(0.806501, 0.0599364, 0.392231, 0.42)
+
+[node name="Timer" type="Timer" parent="Dungeon/HeroManager/Hero2/AutoAttack"]
+
+[node name="MeleeAnimation" type="Node2D" parent="Dungeon/HeroManager/Hero2/AutoAttack"]
+script = ExtResource("12_g8pro")
+
 [node name="Hero3" type="Node2D" parent="Dungeon/HeroManager"]
 position = Vector2(0, 56)
 script = ExtResource("5_fo6df")
@@ -329,52 +351,6 @@ skillList = Array[Resource("res://skills/hero_skill.gd")]([ExtResource("8_84dgh"
 [node name="MobManager" type="Node2D" parent="Dungeon"]
 position = Vector2(190, 16)
 script = ExtResource("12_pj0as")
-
-[node name="Mob" type="Node2D" parent="Dungeon/MobManager"]
-script = ExtResource("5_fo6df")
-
-[node name="Sprite2D" type="Sprite2D" parent="Dungeon/MobManager/Mob"]
-texture = ExtResource("13_5lp2i")
-
-[node name="Shape" type="Area2D" parent="Dungeon/MobManager/Mob"]
-script = ExtResource("14_ig4a3")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/MobManager/Mob/Shape"]
-shape = SubResource("RectangleShape2D_44wmu")
-
-[node name="Damagable" parent="Dungeon/MobManager/Mob" instance=ExtResource("10_8hd32")]
-
-[node name="Mob2" type="Node2D" parent="Dungeon/MobManager"]
-position = Vector2(0, 84)
-script = ExtResource("5_fo6df")
-
-[node name="Sprite2D" type="Sprite2D" parent="Dungeon/MobManager/Mob2"]
-texture = ExtResource("13_5lp2i")
-
-[node name="Shape" type="Area2D" parent="Dungeon/MobManager/Mob2"]
-script = ExtResource("14_ig4a3")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/MobManager/Mob2/Shape"]
-shape = SubResource("RectangleShape2D_44wmu")
-
-[node name="Damagable" parent="Dungeon/MobManager/Mob2" instance=ExtResource("10_8hd32")]
-
-[node name="DeathFade" type="Node2D" parent="Dungeon/MobManager/Mob2"]
-script = ExtResource("12_72ma0")
-
-[node name="AutoAttack" type="Area2D" parent="Dungeon/MobManager/Mob2"]
-script = ExtResource("11_ga7h5")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/MobManager/Mob2/AutoAttack"]
-position = Vector2(0, -10)
-scale = Vector2(1, 2)
-shape = SubResource("RectangleShape2D_im4sf")
-debug_color = Color(0.806501, 0.0599364, 0.392231, 0.42)
-
-[node name="Timer" type="Timer" parent="Dungeon/MobManager/Mob2/AutoAttack"]
-
-[node name="MeleeAnimation" type="Node2D" parent="Dungeon/MobManager/Mob2/AutoAttack"]
-script = ExtResource("12_g8pro")
 
 [node name="SkillManager" type="Control" parent="Dungeon"]
 layout_mode = 3
