@@ -5,6 +5,10 @@ extends Node2D
 @onready var skill_manager = $SkillManager
 @onready var mob_manager = $MobManager
 @onready var hero_manager = $HeroManager
+@onready var postiion_manager = $PositionManager
+@onready var piece_resource = $PieceResource
+
+
 @onready var selected_hero : Node2D = $HeroManager/Hero
 
 enum DungeonState {
@@ -23,6 +27,10 @@ func _ready():
 	skill_manager.set_helping.connect(set_helping)
 	mob_manager.enemy_clicked.connect(enemy_clicked)
 	hero_manager.piece_clicked.connect(hero_clicked)
+	
+	piece_resource.hire_mob("Crab")
+	postiion_manager.update_positions()
+	
 
 func _input(event):
 	# Check if the event is a mouse button event

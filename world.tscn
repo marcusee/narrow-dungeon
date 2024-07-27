@@ -1,10 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://diu0fkj535mul"]
+[gd_scene load_steps=29 format=3 uid="uid://diu0fkj535mul"]
 
 [ext_resource type="Texture2D" uid="uid://by8gm2x6pel8y" path="res://tileset/tilemap_packed.png" id="1_i5nas"]
 [ext_resource type="Script" path="res://scripts/directors/WorldTileMap.gd" id="2_imuq6"]
 [ext_resource type="Texture2D" uid="uid://d4f0jq5ch4mam" path="res://assets/heroes/knight/knight.png" id="3_4a0rc"]
 [ext_resource type="Script" path="res://scripts/directors/Dungeon.gd" id="3_bji8q"]
 [ext_resource type="Script" path="res://scripts/managers/HeroManager.gd" id="4_7cook"]
+[ext_resource type="Script" path="res://scripts/managers/position_manager.gd" id="4_kop7c"]
 [ext_resource type="Script" path="res://scripts/executive/Piece.gd" id="5_fo6df"]
 [ext_resource type="Script" path="res://scripts/executive/SkillBook.gd" id="7_cmwnb"]
 [ext_resource type="Resource" uid="uid://bprsiipmwkuun" path="res://skills/knight/block.tres" id="8_84dgh"]
@@ -21,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://dlmwrayvjphux" path="res://assets/mobs/crab.png" id="13_5lp2i"]
 [ext_resource type="Script" path="res://scripts/executive/MobArea.gd" id="14_ig4a3"]
 [ext_resource type="Resource" uid="uid://cqgfs7ypt4v8j" path="res://skills/priest/heal.tres" id="17_4bwym"]
+[ext_resource type="Script" path="res://scripts/managers/PieceResource.gd" id="23_hxrnn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4w6qn"]
 texture = ExtResource("1_i5nas")
@@ -160,11 +162,11 @@ texture = ExtResource("1_i5nas")
 [sub_resource type="TileSet" id="TileSet_pgbt1"]
 sources/1 = SubResource("TileSetAtlasSource_4w6qn")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8cl4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44wmu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im4sf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_44wmu"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8cl4"]
 
 [node name="world" type="Node2D"]
 
@@ -179,6 +181,76 @@ zoom = Vector2(3, 3)
 
 [node name="Dungeon" type="Node2D" parent="."]
 script = ExtResource("3_bji8q")
+
+[node name="PieceResource" type="Node2D" parent="Dungeon" node_paths=PackedStringArray("enemy_manager", "position_manager")]
+script = ExtResource("23_hxrnn")
+enemy_manager = NodePath("../MobManager")
+position_manager = NodePath("../PositionManager")
+
+[node name="PieceCandidate" type="Node2D" parent="Dungeon/PieceResource"]
+
+[node name="Crab" type="Node2D" parent="Dungeon/PieceResource/PieceCandidate"]
+position = Vector2(-64, 32)
+script = ExtResource("5_fo6df")
+
+[node name="Sprite2D" type="Sprite2D" parent="Dungeon/PieceResource/PieceCandidate/Crab"]
+texture = ExtResource("13_5lp2i")
+
+[node name="Shape" type="Area2D" parent="Dungeon/PieceResource/PieceCandidate/Crab"]
+collision_mask = 2
+script = ExtResource("14_ig4a3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/PieceResource/PieceCandidate/Crab/Shape"]
+shape = SubResource("RectangleShape2D_44wmu")
+
+[node name="Damagable" parent="Dungeon/PieceResource/PieceCandidate/Crab" instance=ExtResource("10_8hd32")]
+
+[node name="DeathFade" type="Node2D" parent="Dungeon/PieceResource/PieceCandidate/Crab"]
+script = ExtResource("12_72ma0")
+
+[node name="AutoAttack" type="Area2D" parent="Dungeon/PieceResource/PieceCandidate/Crab"]
+collision_mask = 2
+script = ExtResource("11_ga7h5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon/PieceResource/PieceCandidate/Crab/AutoAttack"]
+position = Vector2(0, -10)
+scale = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_im4sf")
+debug_color = Color(0.806501, 0.0599364, 0.392231, 0.42)
+
+[node name="Timer" type="Timer" parent="Dungeon/PieceResource/PieceCandidate/Crab/AutoAttack"]
+
+[node name="MeleeAnimation" type="Node2D" parent="Dungeon/PieceResource/PieceCandidate/Crab/AutoAttack"]
+script = ExtResource("12_g8pro")
+
+[node name="PositionManager" type="Node2D" parent="Dungeon" node_paths=PackedStringArray("hero_manager", "enemy_manager")]
+script = ExtResource("4_kop7c")
+hero_manager = NodePath("../HeroManager")
+enemy_manager = NodePath("../MobManager")
+
+[node name="Position8" type="Marker2D" parent="Dungeon/PositionManager"]
+position = Vector2(160, 16)
+
+[node name="Position7" type="Marker2D" parent="Dungeon/PositionManager"]
+position = Vector2(160, 40)
+
+[node name="Position6" type="Marker2D" parent="Dungeon/PositionManager"]
+position = Vector2(160, 64)
+
+[node name="Position5" type="Marker2D" parent="Dungeon/PositionManager"]
+position = Vector2(160, 88)
+
+[node name="Position4" type="Marker2D" parent="Dungeon/PositionManager"]
+position = Vector2(160, 112)
+
+[node name="Position3" type="Marker2D" parent="Dungeon/PositionManager"]
+position = Vector2(160, 136)
+
+[node name="Position2" type="Marker2D" parent="Dungeon/PositionManager"]
+position = Vector2(160, 160)
+
+[node name="Position1" type="Marker2D" parent="Dungeon/PositionManager"]
+position = Vector2(160, 184)
 
 [node name="HeroManager" type="Node2D" parent="Dungeon"]
 position = Vector2(190, 120)
