@@ -233,19 +233,15 @@ enemy_manager = NodePath("../MobManager")
 
 [node name="Position8" type="Marker2D" parent="Dungeon/PositionManager"]
 position = Vector2(160, 16)
-script = ExtResource("13_w84ff")
 
 [node name="Position7" type="Marker2D" parent="Dungeon/PositionManager"]
 position = Vector2(160, 40)
-script = ExtResource("13_w84ff")
 
 [node name="Position6" type="Marker2D" parent="Dungeon/PositionManager"]
 position = Vector2(160, 64)
-script = ExtResource("13_w84ff")
 
 [node name="Position5" type="Marker2D" parent="Dungeon/PositionManager"]
 position = Vector2(160, 88)
-script = ExtResource("13_w84ff")
 
 [node name="Position4" type="Marker2D" parent="Dungeon/PositionManager"]
 position = Vector2(160, 112)
@@ -253,15 +249,12 @@ script = ExtResource("13_w84ff")
 
 [node name="Position3" type="Marker2D" parent="Dungeon/PositionManager"]
 position = Vector2(160, 136)
-script = ExtResource("13_w84ff")
 
 [node name="Position2" type="Marker2D" parent="Dungeon/PositionManager"]
 position = Vector2(160, 160)
-script = ExtResource("13_w84ff")
 
 [node name="Position1" type="Marker2D" parent="Dungeon/PositionManager"]
 position = Vector2(160, 184)
-script = ExtResource("13_w84ff")
 
 [node name="HeroManager" type="Node2D" parent="Dungeon"]
 position = Vector2(190, 120)

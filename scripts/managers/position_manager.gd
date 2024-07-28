@@ -32,3 +32,16 @@ func position_pieces(manager : Node2D, from_bottom : bool):
 	for i in range(piece_size):
 		pieces[i].global_position = markers[i].global_position
 		
+		markers[i].piece = pieces[i]
+
+#func infront_has_space():
+	
+
+func _input(event):
+	# Check if the event is a mouse button event
+	if event is InputEventMouseButton:
+		# Reset state
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			var markers = get_children()
+			for marker in get_children():
+				print(marker.is_empty())
