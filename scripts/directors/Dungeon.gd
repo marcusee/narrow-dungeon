@@ -70,7 +70,6 @@ func enemy_clicked(mob):
 		#skill.invoke_skill(caster, self, null)
 
 func play_skill(caster, skill):
-	print(skill.skill_name)
 	if skill.skill_type == Global.SkillType.ACTIVE:
 		skill.invoke_skill(caster, self, null)
 		

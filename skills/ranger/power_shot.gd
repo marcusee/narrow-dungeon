@@ -9,6 +9,5 @@ func _init():
 func invoke_skill(caster, dungeon_director, target):
 	var _damagable = target.get_node('Damagable')
 	if _damagable != null:
-		print("yeap")
 		_damagable.take_damage(damage)
 	pass

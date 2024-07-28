@@ -15,5 +15,8 @@ func start_fade_out():
 	tween.finished.connect(_on_tween_finished)
 
 # Callback function when the tween animation is finished
+# MARCUS: maybe we should pipe the data of mob down here
 func _on_tween_finished():
-	get_parent().queue_free()
+	var mob = get_parent()
+	if mob:
+		DMail.mob_died.emit(mob)
