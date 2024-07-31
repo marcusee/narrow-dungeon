@@ -21,8 +21,8 @@ func onboard_mob(mob):
 
 func offboard_mob(mob):
 	var mob_area = mob.get_node('./Shape')
-	mob_area.input_event.connect(_on_input_event.bind(mob))
-	add_child(mob)
+	#mob_area.input_event.connect(_on_input_event.bind(mob))
+	mob.queue_free()
 	pass
 	
 

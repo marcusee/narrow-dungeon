@@ -226,6 +226,9 @@ debug_color = Color(0.806501, 0.0599364, 0.392231, 0.42)
 [node name="MeleeAnimation" type="Node2D" parent="Dungeon/PieceResource/PieceCandidate/Crab/AutoAttack"]
 script = ExtResource("12_g8pro")
 
+[node name="Timer" type="Timer" parent="Dungeon/PieceResource"]
+autostart = true
+
 [node name="PositionManager" type="Node2D" parent="Dungeon" node_paths=PackedStringArray("hero_manager", "enemy_manager")]
 script = ExtResource("4_kop7c")
 hero_manager = NodePath("../HeroManager")

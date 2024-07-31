@@ -32,4 +32,7 @@ func heal(value):
 
 func _update_hp_ui():
 	var label = $Hpcontrol/Label
-	label.text = str(hp)
+	if hp < 0:
+		label.text = "0"
+	else:
+		label.text = str(hp)
